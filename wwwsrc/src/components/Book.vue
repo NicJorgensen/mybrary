@@ -43,6 +43,9 @@
                                 Add to a Library
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div v-if="libraries.length == 0">
+                                    <p>No Libraries!</p>
+                                </div>
                                 <div class="dropdown-item" v-for="library in libraries">
                                     <p @click="addToLibrary(book.id, library.id)">{{library.name}}</p>
                                 </div>

@@ -36,22 +36,19 @@ export default new vuex.Store({
             state.user = {}
         },
         setBooks(state, payload) {
-            state.books = payload
-            state.books.sort(function (a, b) { return 0.5 - Math.random() })
+            state.books = payload.sort(function (a, b) { return 0.5 - Math.random() })
         },
         addBook(state, payload) {
             state.books.unshift(payload)
         },
         setLibraries(state, payload) {
-            state.libraries = payload
-            state.libraries.sort(function (a, b) { return 0.5 - Math.random() })
+            state.libraries = payload.sort(function (a, b) { return 0.5 - Math.random() })
         },
         addLibrary(state, payload) {
             state.libraries.unshift(payload)
         },
         setLibraryBooks(state, payload) {
-            state.libraryBooks = payload
-            state.libraryBooks.sort(function (a, b) { return 0.5 - Math.random() })
+            state.libraryBooks = payload.sort(function (a, b) { return 0.5 - Math.random() })
         },
         addLibraryBook(state, payload) {
             state.libraryBooks.unshift(payload)
