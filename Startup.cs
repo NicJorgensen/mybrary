@@ -57,6 +57,7 @@ namespace keepr
       services.AddTransient<UserRepository>();
       services.AddTransient<BookRepository>();
       services.AddTransient<LibraryRepository>();
+      services.AddTransient<LibraryBookRepository>();
     }
 
     private IDbConnection CreateDBContext()

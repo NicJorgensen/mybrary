@@ -44,7 +44,8 @@ namespace keepr.Repositories
         {
             return _db.Query<Library>(@"
             SELECT * FROM libraries WHERE userId = @UserId
-            ", new {UserId = userId});
+            ", new { UserId = userId });
         }
+
     }
 }

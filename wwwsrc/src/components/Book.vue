@@ -2,7 +2,9 @@
     <div class="book">
         <div data-toggle="modal" :data-target="'#'+id">
             <img class="cover" :src="book.cover">
-            <h5 class="title"><b>{{book.title}}</b></h5>
+            <h5 class="title">
+                <b>{{book.title}}</b>
+            </h5>
             <p>{{book.author}}</p>
         </div>
         <!-- Modal -->
@@ -24,14 +26,28 @@
                         </div>
                         <div class="flexy">
                             <h4>Genre:</h4>
-                            <h6><b>{{book.genre}}</b></h6>
+                            <h6>
+                                <b>{{book.genre}}</b>
+                            </h6>
                             <h4>Synopsis:</h4>
-                            <h6><b>{{book.synopsis}}</b></h6>
+                            <h6>
+                                <b>{{book.synopsis}}</b>
+                            </h6>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <div class="dropdown">
+                            <button @click="getLibraries" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Add to a Library
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-item" v-for="library in libraries">
+                                    <p @click="addToLibrary(book.id, library.id)">{{library.name}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,8 +64,21 @@
 
             }
         },
+        methods: {
+            getLibraries() {
+                this.$store.dispatch('getLibraries', this.$store.state.user.id)
+            },
+            addToLibrary(bookId, libraryId) {
+                this.$store.dispatch('addToLibrary', { bookId: bookId, libraryId: libraryId, userId: this.$store.state.user.id })
+            }
+        },
         components: {
 
+        },
+        computed: {
+            libraries() {
+                return this.$store.state.libraries
+            }
         },
         props: ['book', 'id']
     }

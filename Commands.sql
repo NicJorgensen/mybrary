@@ -88,12 +88,11 @@
 
 
 -- -- USE THIS LINE FOR GET KEEPS BY VAULTID
--- SELECT * FROM librarybooks lb
--- INNER JOIN books b ON b.id = lb.bookId 
+-- SELECT * FROM noseyjaguar.librarybooks lb
+-- INNER JOIN noseyjaguar.books b ON b.id = lb.bookId 
 -- WHERE (libraryId = 2)
 
 -- SELECT * FROM noseyjaguar.users
 -- SELECT * FROM books
 -- SELECT * FROM noseyjaguar.libraries 
 -- SELECT * FROM noseyjaguar.librarybooks
-

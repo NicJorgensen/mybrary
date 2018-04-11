@@ -25,6 +25,7 @@ export default new vuex.Store({
         user: {},
         books: [],
         libraries: [],
+        libraryBooks: [],
         onProfile: false
     },
     mutations: {
@@ -42,6 +43,15 @@ export default new vuex.Store({
         },
         setLibraries(state, payload) {
             state.libraries = payload
+        },
+        addLibrary(state, payload) {
+            state.libraries.unshift(payload)
+        },
+        setLibraryBooks(state, payload) {
+            state.libraryBooks = payload
+        },
+        addLibraryBook(state, payload){
+            state.libraryBooks.unshift(payload)
         },
         onProfile(state, payload) {
             state.onProfile = true
@@ -125,7 +135,6 @@ export default new vuex.Store({
                 })
         },
         createBook({ commit, dispatch }, payload) {
-            console.log(payload)
             api.post('books', payload)
                 .then(res => {
                     commit('addBook', res.data)
@@ -135,11 +144,18 @@ export default new vuex.Store({
                 })
         },
         getLibraries({ commit, dispatch }, payload) {
-            console.log(payload)
             api.get('libraries/' + payload, payload)
                 .then(res => {
-                    console.log(res.data)
                     commit('setLibraries', res.data)
+                })
+                .catch(err => {
+                    console.log('Unable to Retrieve Libraries.')
+                })
+        },
+        createLibrary({ commit, dispatch }, payload) {
+            api.post('libraries', payload)
+                .then(res => {
+                    commit('addLibrary', res.data)
                 })
                 .catch(err => {
                     console.log('Unable to Retrieve Libraries.')
@@ -156,6 +172,24 @@ export default new vuex.Store({
         },
         goHome({ commit, dispatch }) {
             router.push({ name: 'Home' })
+        },
+        addToLibrary({ commit, dispatch }, payload) {
+            api.post('librarybooks', payload)
+                .then(res => {
+                    commit('addLibraryBook', res.data)
+                })
+                .catch(err => {
+                    console.log('Unable to Post Library Book.')
+                })
+        },
+        getLibraryBooks({ commit, dispatch }, payload){
+            api.get('librarybooks/' + payload, payload)
+            .then(res => {
+                commit('setLibraryBooks', res.data)
+            })
+            .catch(err => {
+                console.log('Unable to Retrieve Library Books.')
+            })
         }
     }
 })
