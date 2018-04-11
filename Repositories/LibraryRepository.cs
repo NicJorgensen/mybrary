@@ -47,5 +47,11 @@ namespace keepr.Repositories
             ", new { UserId = userId });
         }
 
+        public Library Delete(int libraryId)
+        {
+            return _db.QueryFirstOrDefault(@"
+            DELETE FROM libraries WHERE id = @LibraryId", new { LibraryId = libraryId });
+        }
+
     }
 }

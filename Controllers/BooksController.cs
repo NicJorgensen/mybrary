@@ -40,6 +40,10 @@ namespace keepr
         //EDIT A BOOK
         // [HttpPut]
         //DELETE A BOOK
-        // [HttpDelete]
+        [HttpDelete("{bookId}")]
+        public Book Delete(int bookId)
+        {
+            return _repo.Delete(bookId);
+        }
     }
 }

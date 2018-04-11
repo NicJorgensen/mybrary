@@ -42,8 +42,13 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
+                                    <div v-if="deleteButton == true">
+                                        <h5>Delete this Library?</h5>
+                                        <button @click="deleteLibrary(library.id), deleteButton = !deleteButton" class="btn deletebtn btn-danger" data-dismiss="modal">Yep, Delete it!</button>
+                                        <button @click="deleteButton = !deleteButton" class="btn deletebtn btn-secondary">Just Kidding, Keep it.</button>
+                                    </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                    <button @click="deleteButton = !deleteButton" type="button" class="btn btn-danger">Delete Library</button>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +69,7 @@
         name: 'Profile',
         data() {
             return {
+                deleteButton: false
 
             }
         },
@@ -75,6 +81,9 @@
         methods: {
             getLibraryBooks(libraryId) {
                 this.$store.dispatch('getLibraryBooks', libraryId)
+            },
+            deleteLibrary(libraryId) {
+                this.$store.dispatch('deleteLibrary', { userId: this.$store.state.user.id, libraryId: libraryId})
             }
         },
         components: {
@@ -129,6 +138,10 @@
     .synopsis,
     .text {
         border-left: indigo 5px solid;
+        margin: 3px;
+    }
+
+    .deletebtn {
         margin: 3px;
     }
 </style>

@@ -48,6 +48,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div v-if="book.userId == user.id">
+                            <button @click="deleteButton = !deleteButton" type="button" class="btn btn-danger">Delete Book</button>
+                            <div v-if="deleteButton == true">
+                                <h5 class="deletebtn">Delete this Book?</h5>
+                                <button @click="deleteBook(book.id), deleteButton = !deleteButton" class="btn deletebtn btn-danger" data-dismiss="modal">Yep, Delete it!</button>
+                                <button @click="deleteButton = !deleteButton" class="btn deletebtn btn-secondary">Just Kidding, Keep it.</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,8 +69,11 @@
         name: 'Book',
         data() {
             return {
-
+                deleteButton: false
             }
+        },
+        mounted() {
+            this.$store.dispatch('authCheck')
         },
         methods: {
             getLibraries() {
@@ -70,6 +81,9 @@
             },
             addToLibrary(bookId, libraryId) {
                 this.$store.dispatch('addToLibrary', { bookId: bookId, libraryId: libraryId, userId: this.$store.state.user.id })
+            },
+            deleteBook(bookId) {
+                this.$store.dispatch('deleteBook', bookId)
             }
         },
         components: {
@@ -78,6 +92,9 @@
         computed: {
             libraries() {
                 return this.$store.state.libraries
+            },
+            user() {
+                return this.$store.state.user
             }
         },
         props: ['book', 'id']
@@ -109,5 +126,9 @@
     .modal-body {
         display: flex;
         flex-direction: row
+    }
+
+    .deletebtn {
+        margin: 3px;
     }
 </style>

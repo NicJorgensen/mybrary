@@ -37,20 +37,23 @@ export default new vuex.Store({
         },
         setBooks(state, payload) {
             state.books = payload
+            state.books.sort(function (a, b) { return 0.5 - Math.random() })
         },
         addBook(state, payload) {
             state.books.unshift(payload)
         },
         setLibraries(state, payload) {
             state.libraries = payload
+            state.libraries.sort(function (a, b) { return 0.5 - Math.random() })
         },
         addLibrary(state, payload) {
             state.libraries.unshift(payload)
         },
         setLibraryBooks(state, payload) {
             state.libraryBooks = payload
+            state.libraryBooks.sort(function (a, b) { return 0.5 - Math.random() })
         },
-        addLibraryBook(state, payload){
+        addLibraryBook(state, payload) {
             state.libraryBooks.unshift(payload)
         },
         onProfile(state, payload) {
@@ -182,14 +185,32 @@ export default new vuex.Store({
                     console.log('Unable to Post Library Book.')
                 })
         },
-        getLibraryBooks({ commit, dispatch }, payload){
+        getLibraryBooks({ commit, dispatch }, payload) {
             api.get('librarybooks/' + payload, payload)
-            .then(res => {
-                commit('setLibraryBooks', res.data)
-            })
-            .catch(err => {
-                console.log('Unable to Retrieve Library Books.')
-            })
+                .then(res => {
+                    commit('setLibraryBooks', res.data)
+                })
+                .catch(err => {
+                    console.log('Unable to Retrieve Library Books.')
+                })
+        },
+        deleteLibrary({ commit, dispatch }, payload) {
+            api.delete('libraries/' + payload.libraryId, payload.LibraryId)
+                .then(res => {
+                    dispatch('getLibraries', payload.userId)
+                })
+                .catch(err => {
+                    console.log('Unable to Delete Library.')
+                })
+        },
+        deleteBook({ commit, dispatch }, payload) {
+            api.delete('books/' + payload, payload)
+                .then(res => {
+                    dispatch('getBooks')
+                })
+                .catch(err => {
+                    console.log('Unable to Delete Book.')
+                })
         }
     }
 })

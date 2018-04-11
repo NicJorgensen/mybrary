@@ -59,5 +59,12 @@ namespace keepr.Repositories
             SELECT * FROM books WHERE id = @id
             ", id);
         }
+
+        public Book Delete(int bookId)
+        {
+            return _db.QueryFirstOrDefault(@"
+            DELETE FROM books WHERE id = @BookId", new { BookId = bookId });
+        }
+
     }
 }

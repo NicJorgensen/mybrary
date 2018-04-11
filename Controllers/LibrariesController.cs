@@ -31,5 +31,11 @@ namespace keepr
             }
             return null;
         }
+
+        [HttpDelete("{libraryId}")]
+        public Library Delete(int libraryId)
+        {
+            return _repo.Delete(libraryId);
+        }
     }
 }
