@@ -17,6 +17,9 @@ namespace keepr.Models
 
         [Required]
         public string Cover { get; set; }
+        public int Views { get; set; }
+        public int Libraries { get; set; }
+
         public string UserId { get; set; }
 
 

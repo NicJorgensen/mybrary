@@ -13,6 +13,7 @@
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
+--     public BIT NOT NULL,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -28,6 +29,8 @@
 --     synopsis VARCHAR(255),
 --     cover VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
+--     views int,
+--     libraries int,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -35,8 +38,8 @@
 --     PRIMARY KEY (id)
 -- );
 
--- ALTER TABLE noseyjaguar.books
--- MODIFY COLUMN title VARCHAR(255);
+-- ALTER TABLE noseyjaguar.libraries
+-- MODIFY COLUMN public VARCHAR(5);
 
 -- INSERT INTO noseyjaguar.books(
 --         title, 
@@ -93,6 +96,12 @@
 -- WHERE (libraryId = 2)
 
 -- SELECT * FROM noseyjaguar.users
--- SELECT * FROM books
+-- SELECT * FROM noseyjaguar.books
 -- SELECT * FROM noseyjaguar.libraries 
 -- SELECT * FROM noseyjaguar.librarybooks
+
+-- DELETE FROM noseyjaguar.libraries
+
+    -- UPDATE noseyjaguar.books
+    -- SET views = views + 1
+    -- WHERE id = 2

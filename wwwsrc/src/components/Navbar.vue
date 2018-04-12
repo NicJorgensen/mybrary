@@ -26,9 +26,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form-group" @submit.prevent="createLibrary(name, description, user)">
+                        <form class="form-group" @submit.prevent="createLibrary(name, description, publicBool, user)">
                             <input class="form-control" type="text" v-model="name" placeholder="Library Name" required>
                             <textarea class="form-control" type="text" v-model="description" placeholder="Description"></textarea>
+                            <div class="flexy2"><p>Public &nbsp;</p><input type="checkbox" v-model="publicBool"></div> 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
@@ -74,6 +75,8 @@
                             </select>
                             <textarea class="form-control" type="text" v-model="synopsis" placeholder="Synopsis"></textarea>
                             <input class="form-control" type="text" v-model="cover" placeholder="Cover Image URL" required>
+                            <small class="text-muted">Everyone will be able to see this.</small>
+                            <br>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                         <div v-if="cover != ''" class="flexy">
@@ -100,8 +103,9 @@
                 genre: '',
                 synopsis: '',
                 cover: '',
-                name : '',
-                description : ''
+                name: '',
+                description: '',
+                publicBool: false
 
             }
         },
@@ -129,8 +133,8 @@
                     this.synopsis = '',
                     this.cover = ''
             },
-            createLibrary(name, description, user) {
-                this.$store.dispatch('createLibrary', { name: name, description: description, userId: user.id })
+            createLibrary(name, description, publicBool, user) {
+                this.$store.dispatch('createLibrary', { name: name, description: description, public: publicBool, userId: user.id })
                 this.name = '',
                     this.description = ''
             }
@@ -198,6 +202,15 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+    }
+
+    .flexy2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: baseline;
+        width: 100%;
+        margin: 5px;
     }
 
     .name {

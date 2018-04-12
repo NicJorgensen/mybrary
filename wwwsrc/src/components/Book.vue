@@ -1,11 +1,21 @@
 <template>
     <div class="book">
-        <div data-toggle="modal" :data-target="'#'+id">
+        <div data-toggle="modal" :data-target="'#'+id" @click="addView(book)" class="book2">
             <img class="cover" :src="book.cover">
             <h5 class="title">
                 <b>{{book.title}}</b>
             </h5>
-            <p>{{book.author}}</p>
+            <p class="author">{{book.author}}</p>
+            <div class="icons">
+                <div>
+                    <i class="fas fa-eye"></i>
+                    <small>{{book.views}}</small>
+                </div>
+                <div>
+                    <i class="fas fa-book"></i>
+                    <small>{{book.libraries}}</small>
+                </div>
+            </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -47,11 +57,12 @@
                                     <p>No Libraries!</p>
                                 </div>
                                 <div class="dropdown-item" v-for="library in libraries">
-                                    <p @click="addToLibrary(book.id, library.id)">{{library.name}}</p>
+                                    <p @click="addToLibrary(book.id, library.id), addLibrary(book)">{{library.name}}</p>
                                 </div>
                             </div>
                         </div>
                         <div v-if="book.userId == user.id">
+                            <button type="button" class="btn btn-success">Edit Book</button>
                             <button @click="deleteButton = !deleteButton" type="button" class="btn btn-danger">Delete Book</button>
                             <div v-if="deleteButton == true">
                                 <h5 class="deletebtn">Delete this Book?</h5>
@@ -87,6 +98,12 @@
             },
             deleteBook(bookId) {
                 this.$store.dispatch('deleteBook', bookId)
+            },
+            addView(book) {
+                this.$store.dispatch('addView', book)
+            },
+            addLibrary(book) {
+                this.$store.dispatch('addLibrary', book)
             }
         },
         components: {
@@ -134,4 +151,18 @@
     .deletebtn {
         margin: 3px;
     }
+
+    .icons {
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(238, 48, 73);
+        border-radius: 20px;
+        padding: 5px;
+        color: white;
+    }
+
+    .author {
+        margin: -2px;
+    }
+
 </style>

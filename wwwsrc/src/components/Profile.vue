@@ -11,6 +11,8 @@
                         <div class="card-body" @click="getLibraryBooks(library.id)" data-toggle="modal" :data-target="'#' + library.id">
                             <h2>{{library.name}}</h2>
                             <h4>{{library.description}}</h4>
+                            <div v-if="library.public == 'true'" class="text-muted"><small>Public</small></div>
+                            <div v-if="library.public == 'false'" class="text-muted"><small>Private</small></div>
                         </div>
                     </div>
 

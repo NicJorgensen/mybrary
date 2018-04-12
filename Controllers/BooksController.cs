@@ -37,8 +37,18 @@ namespace keepr
             }
             return null;
         }
-        //EDIT A BOOK
-        // [HttpPut]
+        //ADD A VIEW
+        [HttpPut("views/{bookId}")]
+        public Book AddView([FromBody]Book book)
+        {
+           return _repo.AddView(book);
+        }
+        //ADD A LIBRARY
+        [HttpPut("libraries/{bookId}")]
+        public Book AddLibrary([FromBody]Book book)
+        {
+           return _repo.AddLibrary(book);
+        }
         //DELETE A BOOK
         [HttpDelete("{bookId}")]
         public Book Delete(int bookId)

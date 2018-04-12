@@ -22,6 +22,7 @@ namespace keepr.Repositories
             {
                 Name = libraryData.Name,
                 Description = libraryData.Description,
+                Public = libraryData.Public,
                 UserId = libraryData.UserId
             };
 
@@ -29,10 +30,12 @@ namespace keepr.Repositories
                 INSERT INTO libraries(
                     name,
                     description,
+                    public,
                     userId
                     ) VALUES(
                         @Name,
                         @Description,
+                        @Public,
                         @UserId
                     )", library);
             library.Id = id;

@@ -42,13 +42,13 @@ export default new vuex.Store({
             state.books.unshift(payload)
         },
         setLibraries(state, payload) {
-            state.libraries = payload.sort(function (a, b) { return 0.5 - Math.random() })
+            state.libraries = payload
         },
         addLibrary(state, payload) {
             state.libraries.unshift(payload)
         },
         setLibraryBooks(state, payload) {
-            state.libraryBooks = payload.sort(function (a, b) { return 0.5 - Math.random() })
+            state.libraryBooks = payload
         },
         addLibraryBook(state, payload) {
             state.libraryBooks.unshift(payload)
@@ -208,6 +208,24 @@ export default new vuex.Store({
                 .catch(err => {
                     console.log('Unable to Delete Book.')
                 })
+        },
+        addView({ commit, dispatch }, payload) {
+            api.put('books/views/' + payload.id, payload)
+            .then(res=> {
+                    
+            })
+            .catch (err =>{
+
+            })
+        },
+        addLibrary({ commit, dispatch }, payload) {
+            api.put('books/libraries/' + payload.id, payload)
+            .then(res=> {
+                    
+            })
+            .catch (err =>{
+
+            })
         }
     }
 })

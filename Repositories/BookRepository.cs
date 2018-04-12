@@ -24,6 +24,8 @@ namespace keepr.Repositories
                 Genre = bookData.Genre,
                 Synopsis = bookData.Synopsis,
                 Cover = bookData.Cover,
+                Views = 0,
+                Libraries = 0,
                 UserId = bookData.UserId
             };
 
@@ -35,6 +37,8 @@ namespace keepr.Repositories
                 genre,
                 synopsis,
                 cover,
+                views,
+                libraries,
                 userId
                 ) VALUES(
                 @Title,
@@ -42,10 +46,42 @@ namespace keepr.Repositories
                 @Genre,
                 @Synopsis,
                 @Cover,
+                0,
+                0,
                 @UserId
                 )", book);
             book.Id = id;
             return book;
+        }
+
+        public Book AddView(Book bookData)
+        {
+            int i = _db.Execute(@"
+            UPDATE books
+            SET views = views + 1
+            WHERE id = @Id
+            ", new { Id = bookData.Id });
+
+            if (i > 0)
+            {
+                return bookData;
+            }
+            return null;
+        }
+
+        public Book AddLibrary(Book bookData)
+        {
+            int i = _db.Execute(@"
+            UPDATE books
+            SET libraries = libraries + 1
+            WHERE id = @Id
+            ", new { Id = bookData.Id });
+
+            if (i > 0)
+            {
+                return bookData;
+            }
+            return null;
         }
 
         public IEnumerable<Book> GetBooks()
