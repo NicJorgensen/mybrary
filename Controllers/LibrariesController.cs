@@ -22,6 +22,13 @@ namespace keepr
             return _repo.GetUserLibraries(userId);
         }
 
+        [HttpGet("public")]
+        public IEnumerable<Library> GetPublicLibraries()
+        {
+            return _repo.GetPublicLibraries();
+        }
+
+
         [HttpPost]
         public Library Create([FromBody]Library library)
         {

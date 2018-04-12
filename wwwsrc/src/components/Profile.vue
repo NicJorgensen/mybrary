@@ -11,8 +11,12 @@
                         <div class="card-body" @click="getLibraryBooks(library.id)" data-toggle="modal" :data-target="'#' + library.id">
                             <h2>{{library.name}}</h2>
                             <h4>{{library.description}}</h4>
-                            <div v-if="library.public == 'true'" class="text-muted"><small>Public</small></div>
-                            <div v-if="library.public == 'false'" class="text-muted"><small>Private</small></div>
+                            <div v-if="library.public == 'true'" class="text-muted">
+                                <small>Public</small>
+                            </div>
+                            <div v-if="library.public == 'false'" class="text-muted">
+                                <small>Private</small>
+                            </div>
                         </div>
                     </div>
 
@@ -31,6 +35,7 @@
                                         <h3>Add a Book to your Library from the Home Page</h3>
                                     </div>
                                     <div v-for="lb in libraryBooks" class="books">
+                                        <!-- <i class="far fa-times-circle" @click="deleteLibraryBook(lb.id, library.id)"></i> -->
                                         <img :src="lb.cover" class="cover">
                                         <div class="text">
                                             <h6>
@@ -85,7 +90,10 @@
                 this.$store.dispatch('getLibraryBooks', libraryId)
             },
             deleteLibrary(libraryId) {
-                this.$store.dispatch('deleteLibrary', { userId: this.$store.state.user.id, libraryId: libraryId})
+                this.$store.dispatch('deleteLibrary', { userId: this.$store.state.user.id, libraryId: libraryId })
+            },
+            deleteLibraryBook(bookId, libraryId) {
+                this.$store.dispatch('deleteLibraryBook', { bookId: bookId, libraryId: libraryId })
             }
         },
         components: {
@@ -145,5 +153,17 @@
 
     .deletebtn {
         margin: 3px;
+    }
+
+    .far {
+        opacity: .7;
+        transition: linear .3s all;
+        height: 5vh
+    }
+
+    .far:hover {
+        opacity: 1;
+        transition: linear .3s all;
+        cursor: pointer;
     }
 </style>

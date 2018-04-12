@@ -26,6 +26,7 @@ export default new vuex.Store({
         books: [],
         libraries: [],
         libraryBooks: [],
+        publicLibraries: [],
         onProfile: false
     },
     mutations: {
@@ -46,6 +47,9 @@ export default new vuex.Store({
         },
         addLibrary(state, payload) {
             state.libraries.unshift(payload)
+        },
+        setPublicLibraries(state, payload) {
+            state.publicLibraries = payload.sort(function (a, b) { return 0.5 - Math.random() })
         },
         setLibraryBooks(state, payload) {
             state.libraryBooks = payload
@@ -152,6 +156,15 @@ export default new vuex.Store({
                     console.log('Unable to Retrieve Libraries.')
                 })
         },
+        getPublicLibraries({ commit, dispatch }) {
+            api.get('libraries/public')
+                .then(res => {
+                    commit('setPublicLibraries', res.data)
+                })
+                .catch(err => {
+                    console.log('Unable to Retrieve Libraries.')
+                })
+        },
         createLibrary({ commit, dispatch }, payload) {
             api.post('libraries', payload)
                 .then(res => {
@@ -209,23 +222,32 @@ export default new vuex.Store({
                     console.log('Unable to Delete Book.')
                 })
         },
+        // deleteLibraryBook({ commit, dispatch }, payload) {
+        //     api.delete('libraries/book', payload)
+        //         .then(res => {
+
+        //         })
+        //         .catch(err => {
+
+        //         })
+        // },
         addView({ commit, dispatch }, payload) {
             api.put('books/views/' + payload.id, payload)
-            .then(res=> {
-                    
-            })
-            .catch (err =>{
+                .then(res => {
 
-            })
+                })
+                .catch(err => {
+
+                })
         },
         addLibrary({ commit, dispatch }, payload) {
             api.put('books/libraries/' + payload.id, payload)
-            .then(res=> {
-                    
-            })
-            .catch (err =>{
+                .then(res => {
 
-            })
+                })
+                .catch(err => {
+
+                })
         }
     }
 })

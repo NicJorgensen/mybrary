@@ -13,7 +13,7 @@
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
---     public BIT NOT NULL,
+--     public VARCHAR (5),
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -105,3 +105,7 @@
     -- UPDATE noseyjaguar.books
     -- SET views = views + 1
     -- WHERE id = 2
+
+-- DELETE FROM noseyjaguar.librarybooks 
+-- WHERE bookId = 3
+-- AND libraryId = 19

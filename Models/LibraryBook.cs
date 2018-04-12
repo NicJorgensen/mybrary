@@ -10,4 +10,10 @@ namespace keepr.Models
         public int BookId { get; set; }
         public string UserId { get; set; }
     }
+
+    public class DeleteLB
+    {
+        public int LibraryId { get; set; }
+        public int BookId { get; set; }
+    }
 }

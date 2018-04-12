@@ -50,6 +50,14 @@ namespace keepr.Repositories
             ", new { UserId = userId });
         }
 
+        //GET ALL PUBLIC LIBRARIES
+        public IEnumerable<Library> GetPublicLibraries()
+        {
+            return _db.Query<Library>(@"
+            SELECT * FROM libraries WHERE public = 'true'
+            ");
+        }
+
         public Library Delete(int libraryId)
         {
             return _db.QueryFirstOrDefault(@"
