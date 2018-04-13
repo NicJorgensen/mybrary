@@ -1,4 +1,4 @@
--- CREATE TABLE noseyjaguar.users (
+-- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     name VARCHAR(20) NOT NULL,
 --     email VARCHAR(255) NOT NULL,
@@ -8,7 +8,7 @@
 -- );
 
 
--- CREATE TABLE noseyjaguar.libraries (
+-- CREATE TABLE libraries (
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@
 --     PRIMARY KEY (id)
 -- );
 
--- CREATE TABLE noseyjaguar.books (
+-- CREATE TABLE books (
 --     id int NOT NULL AUTO_INCREMENT,
 --     title VARCHAR(255) NOT NULL,
 --     author VARCHAR(255) NOT NULL,
@@ -38,10 +38,10 @@
 --     PRIMARY KEY (id)
 -- );
 
--- ALTER TABLE noseyjaguar.libraries
+-- ALTER TABLE libraries
 -- MODIFY COLUMN public VARCHAR(5);
 
--- INSERT INTO noseyjaguar.books(
+-- INSERT INTO books(
 --         title, 
 --         author,
 --         genre,
@@ -56,7 +56,7 @@
 --         "https://images.gr-assets.com/books/1500930947l/9969571.jpg",
 --         "9a3d3bc0-a91d-4879-a0cd-72c142659264")
 
--- INSERT INTO noseyjaguar.libraries(
+-- INSERT INTO libraries(
 --             name,
 --             description,
 --             userId
@@ -66,7 +66,7 @@
 --             "9a3d3bc0-a91d-4879-a0cd-72c142659264"
 --             )
 
--- CREATE TABLE noseyjaguar.librarybooks (
+-- CREATE TABLE librarybooks (
 --     id int NOT NULL AUTO_INCREMENT,
 --     libraryId int NOT NULL,
 --     bookId int NOT NULL,
@@ -91,21 +91,21 @@
 
 
 -- -- USE THIS LINE FOR GET KEEPS BY VAULTID
--- SELECT * FROM noseyjaguar.librarybooks lb
--- INNER JOIN noseyjaguar.books b ON b.id = lb.bookId 
+-- SELECT * FROM librarybooks lb
+-- INNER JOIN  books b ON b.id = lb.bookId 
 -- WHERE (libraryId = 2)
 
--- SELECT * FROM noseyjaguar.users
--- SELECT * FROM noseyjaguar.books
--- SELECT * FROM noseyjaguar.libraries 
--- SELECT * FROM noseyjaguar.librarybooks
+-- SELECT * FROM users
+-- SELECT * FROM books
+-- SELECT * FROM libraries 
+-- SELECT * FROM librarybooks
 
--- DELETE FROM noseyjaguar.libraries
+-- DELETE FROM libraries
 
-    -- UPDATE noseyjaguar.books
+    -- UPDATE  books
     -- SET views = views + 1
     -- WHERE id = 2
 
--- DELETE FROM noseyjaguar.librarybooks 
+-- DELETE FROM librarybooks 
 -- WHERE bookId = 3
 -- AND libraryId = 19
